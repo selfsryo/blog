@@ -4,7 +4,7 @@ services:
     container_name: django
     build: ./dockerfiles/django
     volumes:
-      - ./django:/code
+      - .:/code
     ports:
       - "8000:8000"
     environment:
