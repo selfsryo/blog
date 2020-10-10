@@ -157,110 +157,110 @@ ul {
   margin: 0 auto;
   width: 80%;
 }
-.post-text >>> h1, .post-text >>> h2, .post-text >>> h3, .post-text >>> h4, .post-text >>> h5 {
+.post-text :deep(h1), .post-text :deep(h2), .post-text :deep(h3), .post-text :deep(h4), .post-text :deep(h5) {
   text-align: center;
   margin: 40px auto 20px;
 }
-.post-text >>> h1 {
+.post-text :deep(h1) {
   font-size: 18px;
   margin-top: 100px;
 }
-.post-text >>> h2 {
+.post-text :deep(h2) {
   font-size: 17px;
   margin-top: 80px;
 }
-.post-text >>> h3 {
+.post-text :deep(h3) {
   font-size: 16px;
 }
-.post-text >>> h4 {
+.post-text :deep(h4) {
   font-size: 15px;
 }
-.post-text >>> h5 {
+.post-text :deep(h5) {
   font-size: 14px;
 }
-.post-text >>> p {
+.post-text :deep(p) {
   font-size: 14px;
   letter-spacing: 0.5px;
   line-height: 26px;
   margin-bottom: 16px;
 }
-.post-text >>> blockquote {
+.post-text :deep(blockquote) {
   border-left: 5px solid #ddd;
   color: #777;
   padding: 1em;
   padding-right: 0;
   margin: 1.5em 0;
 }
-.post-text >>> blockquote p {
+.post-text :deep(blockquote) p {
   margin-bottom: 0;
 }
-.post-text >>> ul{
+.post-text :deep(ul){
   font-size: 14px;
 }
-.post-text >>> table {
+.post-text :deep(table) {
   font-size: 14px;
   border-collapse: collapse;
   margin: 30px auto;
   text-align: center;
 }
-.post-text >>> th {
+.post-text :deep(th) {
   background: #011627;
   color: #d6deeb;
   font-weight: normal;
 }
-.post-text >>> th,
-.post-text >>> td {
+.post-text :deep(th),
+.post-text :deep(td) {
   padding: 5px;
   border: solid 1px;
 }
-.post-text >>> a {
+.post-text :deep(a) {
   color: #000;
 }
-.post-text >>> a:hover {
+.post-text :deep(a):hover {
   color: #ff0000;
 }
-.post-text >>> img {
+.post-text :deep(img) {
   width: 100%;
 }
-.post-text >>> pre {
+.post-text :deep(pre) {
   margin: 10px auto 30px;
   font-size: 14px;
 }
-.post-text >>> .toc {
+.post-text :deep(.toc) {
   background: #f2f2f2;
   margin: 0 auto 100px;
   padding: 40px 80px;
 }  
-.post-text >>> .toc a {
+.post-text :deep(.toc a) {
   color: #123456;
   font-size: 16px;
   font-weight: bold;
   text-decoration: none;
 }
-.post-text >>> .toc ul ul a{
+.post-text :deep(.toc) ul ul a{
   color: #000;
   font-size: 14px;
   font-weight: normal;
 }
-.post-text >>> .toc p {
+.post-text :deep(.toc) p {
   font-size: 16px;
   font-weight: bold;
   text-align: center;
 }
-.post-text >>> .toc li {
+.post-text :deep(.toc) li {
   margin-top: 30px;
 }
-.post-text >>> .toc ul ul li {
+.post-text :deep(.toc) ul ul li {
   list-style: none;
   margin-top: 5px;
 }
 .mask,
-.post-text >>> #maskedToc {
+.post-text :deep(#maskedToc) {
   opacity: 0;
   transition-property: opacity;
   transition-duration: 0.5s;
 }
-.post-text >>> #maskedToc {
+.post-text :deep(#maskedToc) {
   position: fixed;
   top: -999px;
 }
@@ -275,7 +275,7 @@ ul {
   left: 0;
   z-index: 2;
 }
-.post-text >>> #maskedToc.show {
+.post-text :deep(#maskedToc.show) {
   background: #fff;
   display: block;
   width: 60%;
@@ -364,45 +364,45 @@ ul {
   .post-lead, .post-text {
     width: 85%;
   }
-  .post-text >>> h1, .post-text >>> h2, .post-text >>> h3, .post-text >>> h4, .post-text >>> h5 {
+  .post-text :deep(h1), .post-text :deep(h2), .post-text :deep(h3), .post-text :deep(h4), .post-text :deep(h5) {
     margin: 15px auto 10px;
   }
-  .post-text >>> h1 {
+  .post-text :deep(h1) {
     font-size: 16px;
     margin-top: 35px;
   }
-  .post-text >>> h2 {
+  .post-text :deep(h2) {
     font-size: 15px;
     margin-top: 25px;
   }
-  .post-text >>> h3 {
+  .post-text :deep(h3) {
     font-size: 14px;
   }
-  .post-text >>> h4 {
+  .post-text :deep(h4) {
     font-size: 13px;
   }
-  .post-text >>> h5 {
+  .post-text :deep(h5) {
     font-size: 12px;
   }
-  .post-text >>> p {
+  .post-text :deep(p) {
     font-size: 12.5px;
     letter-spacing: 0.3px;
     line-height: 22px;
   }
-  .post-text >>> .toc {
+  .post-text :deep(.toc) {
     margin: 0 auto 50px;
     padding: 20px 50px;
   }
-  .post-text >>> .toc li {
+  .post-text :deep(.toc) li {
     margin-top: 20px;
   }
-  .post-text >>> .toc a {
+  .post-text :deep(.toc) a {
     font-size: 12.5px;
   }
-  .post-text >>> .toc ul ul a{
+  .post-text :deep(.toc) ul ul a{
     font-size: 11px;
   }
-  .post-text >>> .toc p {
+  .post-text :deep(.toc) p {
     font-size: 12.5px;
   }
   .navi ul {
