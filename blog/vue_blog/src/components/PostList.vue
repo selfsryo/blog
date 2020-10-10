@@ -4,7 +4,7 @@
     <router-link class="blog-logo" :to="{name: 'posts'}">Blog</router-link>
 
     <ul class="tag-filter">
-      <li class="category">TAG</li>
+      <li class="category">CATEGORY</li>
       <li>
         <select v-model="selectedTag" @change="search()">
           <option value="" :key="-1">all</option>
@@ -53,7 +53,7 @@ export default {
     $route() {
       this.getPosts()
       this.selectedTag = this.$route.query.tag || ''
-	},
+    },
   },
   created() {
     this.getPosts()
@@ -85,12 +85,12 @@ export default {
       const params = this.$route.query
       const queryString = Object.keys(params).map(key => key + '=' + params[key]).join('&')
       if (queryString) {
-        postURL += '?' + queryString
+          postURL += '?' + queryString
       }
 
       this.$http(postURL)
         .then(response => {
-          return response.json()
+            return response.json()
         })
         .then(data => {
           this[UPDATE_POSTS](data)
@@ -108,10 +108,11 @@ export default {
         url = new URL(location.href)
       }
       const tag = url.searchParams.get('tag') || ''
+
       return this.$router.resolve({
         name: 'posts',
         query: {tag, page }
-      }).route.fullPath
+      }).fullPath
     },
     updateSelectedTag(tag) {
       this.selectedTag = tag

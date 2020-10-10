@@ -4,7 +4,7 @@
     <router-link class="blog-logo" :to="{name: 'posts'}">Blog</router-link>
 
     <ul class="tag-filter">
-      <li class="category">TAG</li>
+      <li class="category">CATEGORY</li>
       <li>
         <select v-model="selectedTag" @change="search()">
           <option value="" :key="-1">all</option>
@@ -96,6 +96,7 @@ export default {
       if (queryString) {
         postURL += "?" + queryString
       }
+
       this.$http(postURL)
         .then(response => {
           return response.json()
@@ -117,6 +118,7 @@ export default {
         url = new URL(location.href)
       }
       const tag = url.searchParams.get("tag") || ""
+
       return this.$router.resolve({
         name: "posts",
         query: {tag, page }

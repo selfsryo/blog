@@ -26,8 +26,6 @@
 
 <script>
 export default {
-  name: "footer",
-
   methods: {
     scrollToTop() {
       window.scrollTo({
