@@ -31,11 +31,14 @@
 
 <script>
 import hljs from 'highlight.js'
+
 export default {
   name: 'post',
+
   props: {
     slug: { type: String }
   },
+
   data() {
     return {
       post: null,
@@ -43,8 +46,10 @@ export default {
       isShowed: false
     }
   },
+
   mounted() {
     this.showNavi()
+
     this.$http(`${this.$httpPosts}${this.slug}/`)
       .then(response => {
         return response.json()
@@ -55,42 +60,62 @@ export default {
         document.querySelector('meta[name="description"]').setAttribute('content', data.lead_text)
       })
   },
+
   updated() {
     this.setTocs()
+
     this.updateCodeSyntaxHighlighting()
+
+    /* Mask a TOC when it is clicked */
     document.getElementById('maskedToc').addEventListener('click', this.showMaskedToc, false)
   },
+
   methods: {
     updateCodeSyntaxHighlighting() {
+      // Apply highlight.js to <code> sections in <pre> sections
       document.querySelectorAll('pre code').forEach(block => {
         hljs.highlightBlock(block)
       })
     },
+
     updateSelectedTag(tag) {
       this.selectedTag = tag
     },
+
     search() {
       this.$router.push({
         name: 'posts',
         query: { page: 1, tag: this.selectedTag }
       })
     },
+
     showNavi() {
       window.addEventListener('scroll', () => {
         this.isShowed = window.scrollY > 1000 ? true : false
       })
     },
+
     showMaskedToc() {
       const maskedToc = document.getElementById('maskedToc')
       maskedToc.classList.toggle('show')
       this.$refs.mask.classList.toggle('show')
     },
+
     setTocs() {
-      const toc = document.getElementsByClassName('toc')[0]
+      /* Operate a <div class='toc'> section included in HTML.
+       * This function is hooked in updated after v-html work. */
+      const toc = document.querySelector('.toc')
       toc.id = 'toc'
+
+      // Insert '目次' at the beginning of TOC
       if (!document.getElementById('tocTitle')) {
-        toc.insertAdjacentHTML('afterbegin', '<p id="tocTitle">目次</p>')
+        const tocTitle = document.createElement('p')
+        tocTitle.id = 'tocTitle'
+        tocTitle.textContent = '目次'
+        toc.insertBefore(tocTitle, toc.firstChild)
       }
+      
+      // Create a masked TOC by cloning from the normally displayed TOC 
       if (!document.getElementById('maskedToc')) {
         const maskedToc = toc.cloneNode(true)
         this.$refs.postText.appendChild(maskedToc)

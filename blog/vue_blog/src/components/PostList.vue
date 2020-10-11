@@ -44,19 +44,23 @@ import { mapActions, mapGetters } from 'vuex'
 import { UPDATE_TAGS, UPDATE_POSTS } from '../store/mutation-types'
 export default {
   name: 'post-list',
+
   data() {
     return {
       selectedTag: this.$route.query.tag || ''
     }
   },
+
   watch: {
     $route() {
       this.getPosts()
       this.selectedTag = this.$route.query.tag || ''
     },
   },
+
   created() {
     this.getPosts()
+
     this.$http(this.$httpTags)
       .then(response => {
         return response.json()
@@ -65,9 +69,11 @@ export default {
         this[UPDATE_TAGS](data)
       })
   },
+
   mounted() {
     document.title = `記事一覧 - Blog`
   },
+
   computed: {
     ...mapGetters([
       'postList',
@@ -78,8 +84,10 @@ export default {
       'nextPageURL',
     ]),
   },
+
   methods: {
     ...mapActions([UPDATE_TAGS, UPDATE_POSTS]),
+    
     getPosts() {
       let postURL = this.$httpPosts
       if (location.search) {
@@ -94,13 +102,17 @@ export default {
           this[UPDATE_POSTS](data)
         })
     },
+
     getPageURL(page) {
+      /* Use getter as URL when the argument is exceptionally "next" or "previous" */
       let url
       if (page === 'next'){
         url = new URL(this.nextPageURL)
         page = url.searchParams.get('page')
       } else if (page === 'previous'){
         url = new URL(this.previousPageURL)
+        /* When transitioning to the 1st page, "previousPageURL" has no parameter of "page".
+         * So assign 1 instead */
         page = url.searchParams.get('page')  || 1
       } else {
         url = new URL(location.href)
@@ -112,9 +124,11 @@ export default {
         query: {tag, page }
       }).fullPath
     },
+
     updateSelectedTag(tag) {
       this.selectedTag = tag
     },
+    
     search() {
       this.$router.push({
         name: 'posts',
