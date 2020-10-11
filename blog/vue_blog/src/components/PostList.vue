@@ -90,10 +90,8 @@ export default {
     
     getPosts() {
       let postURL = this.$httpPosts
-      const params = this.$route.query
-      const queryString = Object.keys(params).map(key => key + '=' + params[key]).join('&')
-      if (queryString) {
-          postURL += '?' + queryString
+      if (location.search) {
+        postURL += location.search
       }
 
       this.$http(postURL)
