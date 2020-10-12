@@ -27,13 +27,13 @@
     </article>
 
     <div class="page-link" v-if="totalPages >= 2">
-      <router-link class="previousPage" id="back" v-if="previousPageURL" :to="getPageURL('previous')">＜</router-link>
+      <router-link class="previousPage" id="back" v-if="previousPageURL" :to="getPageURL(currentPage - 1)">＜</router-link>
       <div class="page-number">
         <router-link :class="{'currentPage': page === currentPage}" v-for="page of totalPages" :key="page" :to="getPageURL(page)">
           {{page}}
         </router-link>
       </div>
-      <router-link class="nextPage" id="next" v-if="nextPageURL" :to="getPageURL('next')">＞</router-link>
+      <router-link class="nextPage" id="next" v-if="nextPageURL" :to="getPageURL(currentPage + 1)">＞</router-link>
     </div>
     
   </section>
@@ -104,24 +104,9 @@ export default {
     },
 
     getPageURL(page) {
-      /* Use getter as URL when the argument is exceptionally "next" or "previous" */
-      let url
-      if (page === 'next'){
-        url = new URL(this.nextPageURL)
-        page = url.searchParams.get('page')
-      } else if (page === 'previous'){
-        url = new URL(this.previousPageURL)
-        /* When transitioning to the 1st page, "previousPageURL" has no parameter of "page".
-         * So assign 1 instead */
-        page = url.searchParams.get('page')  || 1
-      } else {
-        url = new URL(location.href)
-      }
-      const tag = url.searchParams.get('tag') || ''
-
       return this.$router.resolve({
         name: 'posts',
-        query: {tag, page }
+        query: {page, tag: this.selectedTag }
       }).fullPath
     },
 
