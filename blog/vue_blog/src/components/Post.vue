@@ -31,6 +31,7 @@
 
 <script>
 import hljs from 'highlight.js'
+import 'highlight.js/styles/night-owl.css'
 
 export default {
   name: 'post',
