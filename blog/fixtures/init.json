@@ -1,0 +1,31 @@
+[
+    {
+        "model": "blog.tag",
+        "pk": 1,
+        "fields": {
+            "name": "Test Tag",
+            "color": "#aaa"
+        }
+    },
+    {
+        "model": "blog.post",
+        "pk": 1,
+        "fields": {
+            "title": "テスト投稿",
+            "title_en": "Test Post",
+            "thumbnail": "",
+            "slug": "test_post",
+            "lead_text": "テスト紹介文です。",
+            "lead_text_en": "This is an Introduction for this test post.",
+            "main_text": "[TOC]\r\n\r\n# テスト見出し1\r\n\r\n## テスト見出し2\r\n\r\n\r\nテスト記事です。テスト記事です。テスト記事です。テスト記事です。テスト記事です。テスト記事です。テスト記事です。テスト記事です。テスト記事です。テスト記事です。テスト記事です。テスト記事です。テスト記事です。テスト記事です。テスト記事です。テスト記事です。テスト記事です。テスト記事です。テスト記事です。テスト記事です。テスト記事です。テスト記事です。テスト記事です。テスト記事です。テスト記事です。テスト記事です。テスト記事です。テスト記事です。テスト記事です。テスト記事です。テスト記事です。テスト記事です。テスト記事です。テスト記事です。テスト記事です。テスト記事です。テスト記事です。\r\n\r\nテスト記事です。\r\nテスト記事です。\r\nテスト記事です。\r\nテスト記事です。\r\nテスト記事です。\r\nテスト記事です。\r\nテスト記事です。\r\nテスト記事です。\r\nテスト記事です。\r\nテスト記事です。\r\nテスト記事です。\r\nテスト記事です。\r\nテスト記事です。\r\nテスト記事です。\r\nテスト記事です。\r\nテスト記事です。\r\n\r\nテスト記事です。\r\nテスト記事です。\r\nテスト記事です。\r\nテスト記事です。\r\nテスト記事です。\r\nテスト記事です。\r\nテスト記事です。\r\nテスト記事です。\r\nテスト記事です。\r\nテスト記事です。\r\nテスト記事です。\r\nテスト記事です。\r\nテスト記事です。\r\nテスト記事です。\r\nテスト記事です。\r\nテスト記事です。\r\nテスト記事です。\r\nテスト記事です。\r\nテスト記事です。\r\nテスト記事です。",
+            "main_text_en": "[TOC]\r\n\r\n# Test headline 1\r\n\r\n##Test headline 2\r\n\r\nThis is a test post. This is a test post. This is a test post. This is a test post. This is a test post. This is a test post. This is a test post. This is a test post. This is a test post. This is a test post. This is a test post. This is a test post. This is a test post. This is a test post. This is a test post. This is a test post. This is a test post. This is a test post. This is a test post. This is a test post. This is a test post. This is a test post. This is a test post. This is a test post. This is a test post. This is a test post. This is a test post. This is a test post. This is a test post. This is a test post. This is a test post. This is a test post. This is a test post. This is a test post. This is a test post. This is a test post. This is a test post. This is a test post. This is a test post. This is a test post.\r\n\r\nThis is a test post.\r\nThis is a test post.\r\nThis is a test post.\r\nThis is a test post.\r\nThis is a test post.\r\nThis is a test post.\r\nThis is a test post.\r\nThis is a test post.\r\nThis is a test post.\r\nThis is a test post.\r\nThis is a test post.\r\nThis is a test post.\r\nThis is a test post.\r\nThis is a test post.\r\nThis is a test post.\r\nThis is a test post.\r\nThis is a test post.\r\nThis is a test post.\r\nThis is a test post.\r\nThis is a test post.\r\n\r\nThis is a test post.\r\nThis is a test post.\r\nThis is a test post.\r\nThis is a test post.\r\nThis is a test post.\r\nThis is a test post.\r\nThis is a test post.\r\nThis is a test post.\r\nThis is a test post.\r\nThis is a test post.\r\nThis is a test post.\r\nThis is a test post.\r\nThis is a test post.\r\nThis is a test post.\r\nThis is a test post.\r\nThis is a test post.\r\nThis is a test post.\r\nThis is a test post.\r\nThis is a test post.",
+            "is_public": true,
+            "created_at": "2023-01-01",
+            "updated_at": null,
+            "color": "#000000",
+            "tag": [
+                1
+            ]
+        }
+    }
+]
