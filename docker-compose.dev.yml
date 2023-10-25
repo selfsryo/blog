@@ -19,7 +19,7 @@ services:
       - postgres_data:/var/lib/postgresql/data/
       - ./db:/docker-entrypoint-initdb.d
     environment:
-      - POSTGRES_USER=user
+      - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=password
       - POSTGRES_DB=postgres
     ports:

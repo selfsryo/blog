@@ -86,9 +86,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
-LANGUAGE_CODE = "ja"
+LANGUAGE_CODE = "en"
 
-TIME_ZONE = "Asia/Tokyo"
+TIME_ZONE = "UTC"
 
 USE_I18N = True
 USE_L10N = True
@@ -130,7 +130,7 @@ if DEBUG:
         "default": {
             "ENGINE": "django.db.backends.postgresql",
             "NAME": "postgres",
-            "USER": "user",
+            "USER": "postgres",
             "PASSWORD": "password",
             "HOST": "postgres",
             "PORT": "5432",
