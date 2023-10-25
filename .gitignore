@@ -11,9 +11,6 @@ db.sqlite3
 db.sqlite3-journal
 staticfiles
 media
-.DS_Store
-static
-db/dump.sql
 
 ### Django.Python Stack ###
 # Byte-compiled / optimized / DLL files
@@ -116,8 +113,7 @@ celerybeat.pid
 *.sage.py
 
 # Environments
-.env*
-!.env.sample
+.env
 .venv
 env/
 venv/
@@ -259,4 +255,3 @@ dist
 .vscode-test
 
 # End of https://www.toptal.com/developers/gitignore/api/node,django
-

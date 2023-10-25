@@ -1,0 +1,21 @@
+version: '3'
+services:
+  web:
+    container_name: django
+    build: ./dockerfiles/django
+    volumes:
+      - .:/code
+    ports:
+      - "8000:8000"
+    environment:
+      DEBUG: 'true'
+    command: python manage.py runserver 0.0.0.0:8000
+
+  front:
+    container_name: vue
+    build: ./dockerfiles/vue
+    volumes:
+      - ./blog:/code
+    ports:
+      - "8080:8080"
+    tty: true
