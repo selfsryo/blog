@@ -7,11 +7,24 @@ const routes = [
   {
     path: '/',
     name: 'posts',
-    component: PostList
+    component: PostList,
+  },
+  {
+    path: '/en/',
+    name: 'postsEnglish',
+    component: PostList,
   },
   {
     path: '/detail/:slug',
     name: 'detail',
+    component: Post,
+    props: routes => ({
+      slug: routes.params.slug,
+    })
+  },
+  {
+    path: '/en/detail/:slug',
+    name: 'detailEnglish',
     component: Post,
     props: routes => ({
       slug: routes.params.slug,

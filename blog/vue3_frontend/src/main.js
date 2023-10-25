@@ -7,7 +7,8 @@ import store from './store'
 const app = createApp(App).use(store).use(router)
 
 app.config.globalProperties.$http = (url, opts) => fetch(url, opts)
-app.config.globalProperties.$httpPosts = 'http://127.0.0.1:8000/api/posts/'
-app.config.globalProperties.$httpTags = 'http://127.0.0.1:8000/api/tags/'
+app.config.globalProperties.$httpPosts = process.env.VUE_APP_API_POSTS
+app.config.globalProperties.$httpEnglishPosts = process.env.VUE_APP_API_EN_POSTS
+app.config.globalProperties.$httpTags = process.env.VUE_APP_API_TAGS
 
 app.mount('#app')
