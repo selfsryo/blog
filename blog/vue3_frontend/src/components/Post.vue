@@ -2,6 +2,10 @@
 
   <article class="container" v-if="post">
 
+    <div v-if="!loaded">
+      <div class="spinner"></div>
+    </div>
+
     <div class="post-header">
       <img class="post-thumbnail" :src="post.thumbnail"/>
       <div class="post-thumbnail-text" :style="{'color': post.color}" >
@@ -19,19 +23,19 @@
     <div class="navi">
       <transition-group tag="ul">
         <li v-show="isShowed" key="1" @click="showMaskedToc">
-          <i class="fas fa-bars"></i>
+          <img src="" alt="toc">
         </li>
       </transition-group>
     </div>
-    
+
     <div class="mask" ref="mask" @click="showMaskedToc"></div>
   </article>
-  
+
 </template>
 
 <script>
 import hljs from 'highlight.js'
-import 'highlight.js/styles/night-owl.css'
+import 'highlight.js/styles/night-owl.css';
 
 export default {
   name: 'post',
@@ -44,31 +48,34 @@ export default {
     return {
       post: null,
       selectedTag: this.$route.query.tag || '',
-      isShowed: false
+      isShowed: false,
+      loaded: false
     }
+  },
+
+  watch: {
+    $route() {
+      this.getPost()
+    },
   },
 
   mounted() {
     this.showNavi()
-
-    this.$http(`${this.$httpPosts}${this.slug}/`)
-      .then(response => {
-        return response.json()
-      })
-      .then(data => {
-        this.post = data
-        document.title = `${data.title} - Blog`
-        document.querySelector('meta[name="description"]').setAttribute('content', data.lead_text)
-      })
+    this.getPost()
   },
 
   updated() {
     this.setTocs()
-
     this.updateCodeSyntaxHighlighting()
 
     /* Mask a TOC when it is clicked */
     document.getElementById('maskedToc').addEventListener('click', this.showMaskedToc, false)
+  },
+
+  computed: {
+    isEnglish() {
+      return this.$route.name === 'detailEnglish'
+    },
   },
 
   methods: {
@@ -79,13 +86,29 @@ export default {
       })
     },
 
+    getPost() {
+      let postURLs = this.isEnglish ? this.$httpEnglishPosts : this.$httpPosts
+      this.$http(`${postURLs}${this.slug}/`)
+        .then(response => {
+          return response.json()
+        })
+        .then(data => {
+          this.post = data
+          document.title = `${data.title} - Blog`
+          document.querySelector('meta[name="description"]').setAttribute('content', data.lead_text)
+          document.querySelector('meta[property="og:title"]').setAttribute('content', `${data.title} - Blog`)
+          document.querySelector('meta[property="og:description"]').setAttribute("content", data.lead_text)
+          this.loaded = true
+        })
+    },
+
     updateSelectedTag(tag) {
       this.selectedTag = tag
     },
 
     search() {
       this.$router.push({
-        name: 'posts',
+        name: this.isEnglish ? 'postsEnglish' : 'posts',
         query: { page: 1, tag: this.selectedTag }
       })
     },
@@ -112,11 +135,11 @@ export default {
       if (!document.getElementById('tocTitle')) {
         const tocTitle = document.createElement('p')
         tocTitle.id = 'tocTitle'
-        tocTitle.textContent = '目次'
+        tocTitle.textContent = this.isEnglish ? 'Table of Contents' :'目次'
         toc.insertBefore(tocTitle, toc.firstChild)
       }
-      
-      // Create a masked TOC by cloning from the normally displayed TOC 
+
+      // Create a masked TOC by cloning from the normally displayed TOC
       if (!document.getElementById('maskedToc')) {
         const maskedToc = toc.cloneNode(true)
         this.$refs.postText.appendChild(maskedToc)
@@ -188,6 +211,7 @@ ul {
   margin: 40px auto 20px;
 }
 .post-text :deep(h1) {
+  color: #123456;
   font-size: 18px;
   margin-top: 100px;
 }
@@ -319,16 +343,12 @@ ul {
   bottom: 60px;
 }
 .navi li {
-  height: 50px;
   text-align: center;
-  line-height: 50px;
-  margin: auto 5px;
-  border-radius: 100%;
-  height: 50px;
-  color: #666;
-  background: rgba(255, 255, 255, 0.7);
   margin: auto 5px;
   cursor: pointer;
+}
+.navi li img {
+  width: 60px;
 }
 .v-enter-active,
 .v-leave-active {
@@ -395,17 +415,19 @@ ul {
   }
   .post-text :deep(h1) {
     font-size: 16px;
-    margin-top: 35px;
+    margin-top: 70px;
   }
   .post-text :deep(h2) {
     font-size: 15px;
-    margin-top: 25px;
+    margin-top: 40px;
   }
   .post-text :deep(h3) {
     font-size: 14px;
+    margin-top: 30px;
   }
   .post-text :deep(h4) {
     font-size: 13px;
+    margin-top: 20px;
   }
   .post-text :deep(h5) {
     font-size: 12px;

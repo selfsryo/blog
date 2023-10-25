@@ -1,7 +1,12 @@
 <template>
   <section class="container">
 
-    <router-link class="blog-logo" :to="{name: 'posts'}">Blog</router-link>
+    <router-link class="blog-logo" :class="{ inactive: isEnglish }" :to="{name: 'posts'}">
+      <img src="">
+    </router-link>
+    <router-link class="blog-logo blog-logo-en" :class="{ inactive: !isEnglish }" :to="{name: 'postsEnglish'}">
+      <img class="logo" src="">
+    </router-link>
 
     <ul class="tag-filter">
       <li class="category">CATEGORY</li>
@@ -13,13 +18,20 @@
       </li>
     </ul>
 
+    <div v-if="!loaded">
+      <div class="spinner"></div>
+      <div class="loadingMask"></div>
+    </div>
+
     <article class="post" v-for="post of postList" :key="post.slug">
-      <router-link class="post-title" :to="{name: 'detail', params: {slug: post.slug}}">{{post.title}}</router-link>
+      <router-link class="post-title" :class="{ inactive: isEnglish }" :to="{name: 'detail', params: {slug: post.slug}}">{{post.title}}</router-link>
+      <router-link class="post-title" :class="{ inactive: !isEnglish }" :to="{name: 'detailEnglish', params: {slug: post.slug}}">{{post.title}}</router-link>
       <div class="post-date">{{(post.created_at)}}</div>
       <img class="post-thumbnail" :src="post.thumbnail"/>
       <p class="post-lead">{{post.lead_text}}</p>
       <div class="post-more">
-        <router-link :to="{name: 'detail', params: {slug: post.slug}}"><span class="right">▶︎ </span><span class="more">more</span></router-link>
+        <router-link :class="{ inactive: isEnglish }" :to="{name: 'detail', params: {slug: post.slug}}"><span class="right">▶︎ </span><span class="more">more</span></router-link>
+        <router-link :class="{ inactive: !isEnglish }" :to="{name: 'detailEnglish', params: {slug: post.slug}}"><span class="right">▶︎ </span><span class="more">more</span></router-link>
       </div>
       <ul class="post-tag">
         <li :style="{'background': tag.color}" v-for="tag of post.tag" :key="tag.id" @click="updateSelectedTag(tag.id); search()"> # {{tag.name}}</li>
@@ -35,7 +47,7 @@
       </div>
       <router-link class="nextPage" id="next" v-if="nextPageURL" :to="getPageURL(currentPage + 1)">＞</router-link>
     </div>
-    
+
   </section>
 </template>
 
@@ -47,12 +59,14 @@ export default {
 
   data() {
     return {
-      selectedTag: this.$route.query.tag || ''
+      selectedTag: this.$route.query.tag || '',
+      loaded: false
     }
   },
 
   watch: {
     $route() {
+      this.loaded = false
       this.getPosts()
       this.selectedTag = this.$route.query.tag || ''
     },
@@ -71,7 +85,17 @@ export default {
   },
 
   mounted() {
-    document.title = `記事一覧 - Blog`
+    if (!this.isEnglish) {
+      document.title = `記事一覧 - Blog`
+      document.querySelector('meta[name="description"]').setAttribute("content", "ブログです。")
+      document.querySelector('meta[property="og:description"]').setAttribute("content", "ブログです。")
+    }
+    else {
+      document.title = `List of Articles - Blog`
+      document.querySelector('meta[name="description"]').setAttribute("content", "Blog")
+      document.querySelector('meta[property="og:title"]').setAttribute("content", "Blog")
+      document.querySelector('meta[property="og:description"]').setAttribute("content", "Blog")
+    }
   },
 
   computed: {
@@ -83,29 +107,32 @@ export default {
       'previousPageURL',
       'nextPageURL',
     ]),
+    isEnglish() {
+      return this.$route.name === 'postsEnglish'
+    },
   },
 
   methods: {
     ...mapActions([UPDATE_TAGS, UPDATE_POSTS]),
-    
-    getPosts() {
-      let postURL = this.$httpPosts
-      if (location.search) {
-        postURL += location.search
-      }
 
-      this.$http(postURL)
+    getPosts() {
+      let postURLs = this.isEnglish ? this.$httpEnglishPosts : this.$httpPosts
+      if (location.search) {
+        postURLs += location.search
+      }
+      this.$http(postURLs)
         .then(response => {
             return response.json()
         })
         .then(data => {
           this[UPDATE_POSTS](data)
+          this.loaded = true
         })
     },
 
     getPageURL(page) {
       return this.$router.resolve({
-        name: 'posts',
+        name: this.$route.name,
         query: {page, tag: this.selectedTag }
       }).fullPath
     },
@@ -113,10 +140,10 @@ export default {
     updateSelectedTag(tag) {
       this.selectedTag = tag
     },
-    
+
     search() {
       this.$router.push({
-        name: 'posts',
+        name: this.$route.name,
         query: { page: 1, tag: this.selectedTag }
       })
     },
@@ -132,15 +159,21 @@ export default {
 ul {
   list-style: none;
 }
+.inactive {
+  display: none !important;
+}
 .blog-logo {
-  color: #000;
-  text-decoration: none;
-  font-size: 32px;
   display: block;
   width: 400px;
   margin: 90px auto 80px;
   text-align: center;
   cursor: pointer;
+}
+img.logo {
+  width: 100%
+}
+.blog-logo-en {
+  margin-bottom: 60px !important;
 }
 .tag-filter {
   border-bottom: #ddd solid 1px;
@@ -232,8 +265,8 @@ article {
 }
 .page-number {
   display: flex;
-  margin: auto;  
-  width: 60px;
+  margin: auto;
+  width: 150px;
   justify-content: space-between;
 }
 .page-number .currentPage, .page-link .previousPage, .page-link .nextPage {
@@ -252,6 +285,16 @@ article {
 .page-link .nextPage {
   right: 30%;
 }
+.loadingMask {
+  background: #fff;
+  display: block;
+  height: 8000px;
+  width: 100%;
+  position: absolute;
+  top: 350px;
+  left: 0;
+  z-index: 2;
+}
 @media (max-width: 1024px) {
   .container {
     width: 70%;
@@ -269,7 +312,7 @@ article {
   }
   .blog-logo {
     width: 90%;
-    margin-bottom: 40px;
+    margin-bottom: 40px !important;
   }
   .tag-filter li{
     margin-left: 6px;
@@ -278,7 +321,7 @@ article {
     font-size: 11px;
   }
   article {
-    padding: 40px 0;
+    padding: 40px 0 70px;
   }
   .post-title {
     font-size: 15px;
@@ -288,15 +331,22 @@ article {
   }
   .post-thumbnail {
     width: 100%;
+    height: initial;
   }
   .post-lead {
     font-size: 12px;
-  } 
+  }
+  .page-number {
+    width: 110px;
+  }
   .page-link .previousPage {
     left: 15%;
   }
   .page-link .nextPage {
     right: 15%;
+  }
+  .loadingMask {
+    top: 300px;
   }
 }
 </style>
