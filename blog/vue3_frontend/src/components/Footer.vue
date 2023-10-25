@@ -3,11 +3,10 @@
     <div class="footer-profile">
       <p class="profile">Profile</p>
       <img src="" alt="Profile">
-      <p class="name">Name" target="_blank" rel="noreferrer"><img src="" alt="Twitter"></a></li>
-        <li><a href="" target="_blank" rel="noreferrer"><img src="" alt="GitHub"></a></li>
-        <li><a href="" target="_blank" rel="noreferrer"><img src="" alt="Mail"></a></li>
-      </ul>
-    </address>
+      <p class="name"></p>
+      <p class="profile-text" :class="{ inactiveProfile: isEnglish }">自己紹介</p>
+      <p class="profile-text" :class="{ inactiveProfile: !isEnglish }">Self Introduction</p>
+    </div>
 
     <ul class="language">
       <li :class="{ active: isEnglish }" @click="translateIntoJapanese()">日本語</li>
