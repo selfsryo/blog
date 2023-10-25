@@ -5,6 +5,7 @@ repos:
       - id: black
         types: [python]
         language_version: python3.10
+        exclude: ^blog/migrations/
   - repo: https://github.com/pycqa/flake8
     rev: 6.1.0
     hooks:
@@ -16,3 +17,4 @@ repos:
     hooks:
       - id: isort
         name: isort (python)
+        exclude: ^blog/migrations/
