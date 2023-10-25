@@ -3,8 +3,12 @@ build:
 	docker compose -f docker-compose.dev.yml build
 up:
 	docker compose -f docker-compose.dev.yml up
+up-d:
+	docker compose -f docker-compose.dev.yml up -d
 build-up:
 	docker compose -f docker-compose.dev.yml up --build
+build-up-d:
+	docker compose -f docker-compose.dev.yml up -d --build
 down:
 	docker compose -f docker-compose.dev.yml down
 down-v:
