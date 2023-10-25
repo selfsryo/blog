@@ -31,7 +31,7 @@ $ make npm-build
 - Docker compose up & build
 
 ```sh
-$ make build-up
+$ make build-up-d
 ```
 
 - Set up Django
@@ -50,10 +50,12 @@ $ open http://localhost:8000
 
 ## Adding an Article
 
-- Add articles from the admin page.
+- Add articles from Django admin page.
 
 ```sh
+# Create a custom superuser with the following command
 $ make createsuperuser
+# "Log in to Django admin page
 $ open http://127.0.0.1:8000/admin/
 ```
 
@@ -105,7 +107,7 @@ $ make pre-commit
 - This blog can be deployed on [Fly.io](https://fly.io/) using [GitHub Actions](./.github/workflows/fly_deploy.yml).
 - Refer to [this](https://fly.io/docs/hands-on/) for creating an application on Fly.io.
 - Refer to [this](https://fly.io/docs/app-guides/continuous-deployment-with-github-actions/) for issuing `FLY_API_TOKEN`.
-- Thumbnails for this blog are automatically uploaded to a specified AWS S3 bucket. After creating your own bucket on AWS S3, obtain the access key of an IAM user with CRUD permissions.
+- Thumbnails for this blog are automatically uploaded to a specified AWS S3 bucket. After creating your own bucket on AWS S3, obtain the access key of an IAM user with CRUD permissions for the bucket.
 - Push this branch to your own GitHub repository. (Recommended to make it a private repository.)
 - Set environment variables in the GitHub repository's Secrets:
   - `FLY_API_TOKEN`: The token obtained above.
