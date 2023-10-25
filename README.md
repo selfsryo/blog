@@ -17,8 +17,15 @@ This is a sample blog built with Django and Vue.js.
 
 ```sh
 $ git clone https://github.com/selfsryo/blog
-$ cp .env.example .env
+$ cp .env.sample .env
 $ cp ./blog/vue3_frontend/.env.sample ./blog/vue3_frontend/.env
+```
+
+- Set up Vue.js
+
+```sh
+$ make npm-install
+$ make npm-build
 ```
 
 - Docker compose up & build
@@ -33,13 +40,6 @@ $ make build-up
 $ make migrate
 # Load sample initial data as needed
 $ make loaddata
-```
-
-- Set up Vue.js
-
-```sh
-$ make npm-install
-$ make npm-build
 ```
 
 - Open in your browser
