@@ -151,7 +151,7 @@ if DEBUG:
 if not DEBUG:
     MIDDLEWARE += ["whitenoise.middleware.WhiteNoiseMiddleware"]
 
-    ALLOWED_HOSTS = ["xxx.com"]
+    ALLOWED_HOSTS = ["example.com"]
     DATABASE_URL = os.environ["DATABASE_URL"]
     DATABASES = {
         "default": dj_database_url.config(),
@@ -171,4 +171,4 @@ if not DEBUG:
     AWS_S3_FILE_OVERWRITE = False
     AWS_DEFAULT_ACL = None
 
-    CSRF_TRUSTED_ORIGINS = ["xxx.com"]
+    CSRF_TRUSTED_ORIGINS = ["example.com"]
