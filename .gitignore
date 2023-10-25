@@ -13,7 +13,7 @@ staticfiles
 media
 .DS_Store
 static
-db/
+db/dump.sql
 
 ### Django.Python Stack ###
 # Byte-compiled / optimized / DLL files
@@ -117,6 +117,7 @@ celerybeat.pid
 
 # Environments
 .env*
+!.env.sample
 .venv
 env/
 venv/
